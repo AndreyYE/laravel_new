@@ -1,0 +1,25 @@
+//// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+//
+//// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Font Awesome
+@import "~font-awesome/scss/font-awesome";
+// ion-rangesSlider
+@import "~ion-rangeslider/css/ion.rangeSlider.css";
+
+// summernote
+@import "~summernote/dist/summernote-bs4.css";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.app-content {
+  flex: 1;
+}

@@ -1,0 +1,13 @@
+{
+            "grant_type" : "password",
+            "client_id" : "2",
+            "client_secret" : "7dsf1MlKuAJiKTe9X8PdGcpsbbx7B2fLFvVIdikV",
+            "username" : "qqq@gmail.com",
+            "password" : "11111111"
+
+}
+request - get all adverts
+api/user/adverts?category=564&region=2374
+request - update advert
+api/user/adverts/{advert}
+{"title" : "new title", "price" : 55, "content" : "new content updated", "address" : "North Elenoraborough,North Santos,"}

@@ -1,0 +1,17 @@
+.search:hover {
+    background: #7d5a29;
+   color: white;
+}
+.animate_color{
+    animation-name: color_change;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.advert_font_size {
+    font-size: 2rem;
+}
+@keyframes color_change {
+    from { background-color: blue; }
+    to { background-color: red; }
+}
