@@ -126,9 +126,10 @@
             <p>Адрес: {{ $advert->address }}</p>
 
             <p style="margin-bottom: 20px">Продавец: {{ $advert->user->name }}</p>
+            @cannot('edit-own-advert', $advert)
             <div class="d-flex flex-row mb-3">
                 <a class="btn btn-success mr-1" href="{{route('adverts.form.send.message',["advert"=>$advert->id])}}"><span class="fa fa-envelope"></span> <span>Send Message</span></a>
-                <span class="btn btn-primary phone-button mr-1" data-source="{{ route('adverts.phone', $advert) }}"><span class="fa fa-phone"></span> <span class="number">Show Phone Number</span></span>
+                <span class="btn btn-primary phone-button mr-1" data-source="{{ route('adverts.phone', $advert) }}" data-setFlash="{{ route('adverts.setFlashMessage') }}"><span class="fa fa-phone"></span> <span class="number">Show Phone Number</span></span>
                 @if ($user && $user->hasInFavorites($advert->id))
                     <form method="POST" action="{{ route('adverts.favorites', $advert) }}" class="mr-1">
                         @csrf
@@ -142,6 +143,7 @@
                     </form>
                 @endif
             </div>
+            @endcannot
 
             <hr/>
             @if($similar_adverts)
@@ -213,6 +215,7 @@
         function axiosShowPhone(url, target)
         {
             axios.get(url).then((data)=>{
+                //console.log(data);
                 let phone = document.querySelector('.phone_show');
                 if(phone){
                     phone.remove();
@@ -222,7 +225,17 @@
                 target.classList.add('disabled');
 
             }).catch((data)=>{
-                console.log(data);
+                if(data.response.status == 401){
+                    axios.post($(target).data('setflash'))
+                    .then(response=>{
+                        if(response.data ==='ok'){
+                            window.location.href = window.location.origin+'/login';
+                        }
+                    })
+                    .catch(error=>{
+                        console.log(error);
+                    });
+                }
             });
         }
 

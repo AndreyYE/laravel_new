@@ -37,6 +37,8 @@ class CreateAdvertAttributesTable extends Migration
 //        Schema::table('advert_attributes',function(Blueprint $table){
 //            $table->dropForeign('category_id');
 //        });
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('advert_attributes');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

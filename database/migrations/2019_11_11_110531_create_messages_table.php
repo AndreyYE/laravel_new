@@ -34,10 +34,12 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('dialogs',function (Blueprint $table){
-            $table->dropForeign('dialog_id');
-            $table->dropForeign('user_id');
-        });
+//        Schema::table('dialogs',function (Blueprint $table){
+//            $table->dropForeign('dialog_id');
+//            $table->dropForeign('user_id');
+//        });
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('messages');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

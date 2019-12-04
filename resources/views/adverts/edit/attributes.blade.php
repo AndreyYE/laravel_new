@@ -21,7 +21,7 @@
                         <select id="attribute_{{ $attribute['id'] }}" class="form-control{{ $errors->has('attributes.' . $attribute['id']) ? ' is-invalid' : '' }}" name="attributes[{{ $attribute['id'] }}]">
                             <option value=""></option>
                             @foreach (\App\Entity\Adverts\Attribute::findOrFail($attribute['id'])->variants as $variant)
-                                <option value="{{ $variant }}" {{\App\Entity\Adverts\Advert\Value::where('attribute_id',$attribute['id'])->where('advert_id',$advert->id)->first()->value == $variant ? 'selected':''}} {{$variant==old('attributes.'.$attribute['id']) ? 'selected':''}}>
+                                <option value="{{ $variant }}" {{\App\Entity\Adverts\Advert\Value::where('attribute_id',$attribute['id'])->where('advert_id',$advert->id)->first()['value'] == $variant ? 'selected':''}} {{$variant==old('attributes.'.$attribute['id']) ? 'selected':''}}>
                                     {{ $variant }}
                                 </option>
                             @endforeach
@@ -41,8 +41,7 @@
                         />
 
                     @else
-
-                        <input id="attribute_{{ $attribute['id'] }}" type="text" class="form-control{{ $errors->has('attributes.' . $attribute['id']) ? ' is-invalid' : '' }}" name="attributes[{{ $attribute['id'] }}]" value="{{ old('attributes.' . $attribute['id'], $advert->getValue($attribute['id'])) }}">
+                        <input id="attribute_{{ $attribute['id'] }}" type="text" class="form-control{{ $errors->has('attributes.' . $attribute['id']) ? ' is-invalid' : '' }}" name="attributes[{{ $attribute['id'] }}]" value="{{ old('attributes.' . $attribute['id'], $advert->getValue($attribute['id'])['value']) }}">
 
                     @endif
 

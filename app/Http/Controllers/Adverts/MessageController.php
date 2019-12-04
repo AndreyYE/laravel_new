@@ -10,7 +10,12 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
-   public function form(Request $request)
+    public function __construct()
+    {
+
+    }
+
+    public function form(Request $request)
    {
        $advert = Advert::findOrFail($request->input('advert'));
        return view('adverts.message.create',compact('advert'));

@@ -1,5 +1,5 @@
+<a class="btn btn-success mb-3" href="{{route('admin.advert.categories.create')}}">Create new category</a>
 @if(!$categories->isEmpty())
-    <a class="btn btn-success mb-3" href="{{route('admin.advert.categories.create')}}">Create new category</a>
 <table class="table table-bordered table-striped">
     <thead>
     <tr>

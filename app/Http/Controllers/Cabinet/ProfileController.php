@@ -36,13 +36,11 @@ class ProfileController extends Controller
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users')->ignore($user->id)
             ],
             'last_name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users')->ignore($user->id)
             ],
             'phone' => [
                 'required',
@@ -56,6 +54,6 @@ class ProfileController extends Controller
         if($oldPhone!==$user->phone){
             $user->unverifyPhone();
         }
-        return redirect()->route('cabinet.home');
+        return redirect()->route('cabinet.profile.index');
     }
 }

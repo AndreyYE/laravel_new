@@ -127,9 +127,9 @@ class AdvertController extends Controller
       //  dd($results);
 //        $params = [
 //            'index' => 'app',
-//            'id'    => 25
+//            'id'    => 1
 //        ];
-        //$this->client->delete($params);
+//        //$this->client->delete($params);
 //        $results = $this->client->get($params);
 //        dd($results);
 //        $advert = Advert::findOrFail(28);
@@ -214,4 +214,10 @@ class AdvertController extends Controller
     {
         ViewAdvert::dispatch($advert->id);
     }
+    public function flashMessage(Request $request)
+    {
+        $request->session()->flash('error', 'Пожалуйста сперва войтиде в приложение');
+        return 'ok';
+    }
+
 }

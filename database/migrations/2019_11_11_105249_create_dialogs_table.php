@@ -37,10 +37,12 @@ class CreateDialogsTable extends Migration
      */
     public function down()
     {
-        Schema::table('dialogs',function (Blueprint $table){
-            $table->dropForeign('user_id');
-            $table->dropForeign('client_id');
-        });
+//        Schema::table('dialogs',function (Blueprint $table){
+//            $table->dropForeign('user_id');
+//            $table->dropForeign('client_id');
+//        });
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('dialogs');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

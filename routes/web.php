@@ -12,6 +12,13 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/customLogin',function (\Illuminate\Http\Request $request){
+    if(\App\Entity\User::where('email',$request->input('email'))->first())
+    {
+        return "<div class='one'> 1 ".\App\Entity\User::first()->name."</div>";
+    }
+    return "<div class='one'> 2 ".\App\Entity\User::first()->name."</div>";
+})->name('customLogin');
 
 Auth::routes(['verify' => true]);
 /*Socialite*/
@@ -30,16 +37,20 @@ Route::group([
     'namespace' => 'Adverts',
 ], function () {
     Route::get('/show/{advert}', 'AdvertController@show')->name('show');
-    Route::get('/show/{advert}/phone', 'AdvertController@phone')->name('phone');
-    Route::post('/show/{advert}/favorites', 'FavoriteController@add')->name('favorites');
-    Route::delete('/show/{advert}/favorites', 'FavoriteController@remove');
     Route::get('/{category}/{region}', 'AdvertController@index')->name('my_advert');
     Route::post('/changeCategory', 'AdvertController@changeCategory')->name('changeCategory');
     Route::post('/search', 'AdvertController@search')->name('my_advert.search');
     Route::post('/clickAdvert/{advert}','AdvertController@clickAdvert')->name('clickAdvert');
     Route::post('/ajax/view/{advert}', 'AdvertController@view')->name('view');
-    Route::get('/send_message','MessageController@form')->name('form.send.message');
-    Route::post('/send_message/{advert}','MessageController@send')->name('send.message');
+    Route::post('ajax/setFlashMessage','AdvertController@flashMessage')->name('setFlashMessage');
+    Route::group(['middleware' => ['auth']],function(){
+        Route::get('/send_message','MessageController@form')->name('form.send.message');
+        Route::post('/send_message/{advert}','MessageController@send')->name('send.message');
+
+        Route::get('/show/{advert}/phone', 'AdvertController@phone')->name('phone');
+        Route::post('/show/{advert}/favorites', 'FavoriteController@add')->name('favorites');
+        Route::delete('/show/{advert}/favorites', 'FavoriteController@remove');
+    });
 });
 
 // Cabinet

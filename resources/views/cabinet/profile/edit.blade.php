@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-   <form method="POST" action="{{ route('cabinet.profile.update', [$user]) }}">
+   <form class="edit_profile" method="POST" action="{{ route('cabinet.profile.update', [$user]) }}">
       @csrf
       @method('PUT')
 

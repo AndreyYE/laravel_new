@@ -39,13 +39,17 @@ class CreateController extends Controller
     {
         // Validation
         $attributes = [];
-        \DB::transaction(function() use ($request){
+        \DB::transaction(function() use ($request, &$attributes){
             foreach ($request['attributes'] as $k => $v)
             {
                 $att = Attribute::findOrFail($k);
+
                 $attributes['attributes.'.$k] = [];
+
+
                 if($att->required){
                     array_push( $attributes['attributes.'.$k], 'required');
+                    print_r($attributes['attributes.'.$k]);
                 }
                 if(!$att->required){
                     array_push( $attributes['attributes.'.$k], 'nullable');
@@ -57,7 +61,7 @@ class CreateController extends Controller
                     array_push( $attributes['attributes.'.$k], 'string');
                 }
                 if($att->type === 'slider'){
-                    array_push( $attributes['attributes.'.$k], 'integer');
+                    array_push( $attributes['attributes.'.$k], 'slider');
                 }
                 if($att->type === 'float'){
                     array_push( $attributes['attributes.'.$k], 'integer');
