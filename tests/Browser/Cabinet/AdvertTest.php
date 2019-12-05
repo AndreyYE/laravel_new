@@ -794,4 +794,47 @@ class AdvertTest extends DuskTestCase
 //        $user->delete();
 //        $user1->delete();
 //    }
+    public function testPromotionAdvert()
+    {
+        $password = '11111111';
+
+        $user1 = factory(User::class)->create([
+            'status'=>User::STATUS_ACTIVE,
+            'password'=>bcrypt($password),
+            'phone'=>'80991165787',
+            'role'=>User::ROLE_USER,
+            'phone_verified'=>'1',
+            'email_verified_at'=>Carbon::now()]);
+
+        $category = factory(Category::class)->create();
+        $region = factory(Region::class)->create();
+        $advert = factory(Advert::class)->create([
+            'region_id'=>$region->id,
+            'category_id'=>$category->id,
+            'user_id'=>$user1->id,
+            'address'=>$region->name,
+            'status'=>'active',
+        ]);
+        $photo = new Photo();
+        $photo->advert_id = $advert->id;
+        $photo->file = 'images/adverts/test.png';
+        $photo->save();
+
+        $this->browse(function (Browser $browser) use($user1, $advert){
+            $browser
+                ->driver->manage()->deleteAllCookies();
+
+            $browser
+                ->loginAs($user1)
+                ->assertAuthenticatedAs($user1)
+                ->visit('/cabinet/adverts')
+                ->assertSee($advert->title)
+                ->clickLink('Promotion')
+                ->assertSee('Create Promotion');
+
+        });
+        $category->delete();
+        $region->delete();
+        $user1->delete();
+    }
 }
