@@ -12,13 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/customLogin',function (\Illuminate\Http\Request $request){
-    if(\App\Entity\User::where('email',$request->input('email'))->first())
-    {
-        return "<div class='one'> 1 ".\App\Entity\User::first()->name."</div>";
-    }
-    return "<div class='one'> 2 ".\App\Entity\User::first()->name."</div>";
-})->name('customLogin');
 
 Auth::routes(['verify' => true]);
 /*Socialite*/
