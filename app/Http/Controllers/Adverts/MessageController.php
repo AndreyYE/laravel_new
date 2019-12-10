@@ -10,10 +10,6 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
-    public function __construct()
-    {
-
-    }
 
     public function form(Request $request)
    {

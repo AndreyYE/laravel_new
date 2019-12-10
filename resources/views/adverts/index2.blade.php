@@ -100,8 +100,8 @@
 @if($most_popular_adverts)
     @foreach($most_popular_adverts['hits']['hits'] as $advert)
         <div class="col-sm-3 mb-3">
-            <div class="card bg-secondary mx-auto text-white" style="width: 10rem;">
-                <img src="{{ asset('build/'.$advert['_source']['photo'][0]) }}" class="card-img-top" alt="НЕТ ФОТО">
+            <div class="card bg-secondary mx-auto text-white card_most_popular_advert">
+                <img src="{{ asset('build/'.$advert['_source']['photo'][0]) }}" class="card-img-top card_most_popular_advert_img" alt="НЕТ ФОТО">
                 <div class="card-body">
                     <h5 class="card-title">{{\Illuminate\Support\Str::limit($advert['_source']['title'], 20)}}</h5>
                     <p class="card-text">{{\Illuminate\Support\Str::limit($advert['_source']['content'],20)}}</p>

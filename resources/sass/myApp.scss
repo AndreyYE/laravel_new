@@ -11,6 +11,15 @@
 .advert_font_size {
     font-size: 2rem;
 }
+.card_most_popular_advert{
+    height: 25rem;
+    width: 100%;
+}
+.card_most_popular_advert_img{
+    height: 50%;
+    width: 100%;
+    object-fit: contain;
+}
 @keyframes color_change {
     from { background-color: blue; }
     to { background-color: red; }
